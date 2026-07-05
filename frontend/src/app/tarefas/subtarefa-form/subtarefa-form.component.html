@@ -1,0 +1,81 @@
+<po-modal
+  id="modal-subtarefa"
+  [p-title]="tituloModal"
+  [p-primary-action]="primaryAction"
+  [p-secondary-action]="secondaryAction"
+  p-size="md"
+  #modalSubtarefaRef
+>
+  <form [formGroup]="form">
+
+    <!-- ── Seção 1: Dados da SubTarefa ───────────────────────── -->
+    <div class="sf-section">
+      <div class="sf-section__titulo">
+        <span class="po-icon po-icon-document"></span>
+        Dados da Subtarefa
+      </div>
+
+      <!-- Descrição (largura total) -->
+      <div class="sf-field">
+        <po-input
+          id="subtarefa-descricao"
+          name="descricao"
+          formControlName="descricao"
+          p-label="Descrição"
+          p-placeholder="Descreva a subtarefa"
+          [p-maxlength]="50"
+          p-required="true"
+        >
+        </po-input>
+      </div>
+
+      <!-- Responsável (largura total) -->
+      <div class="sf-field"> 
+        <po-input
+          id="subtarefa-responsavel"
+          name="responsavel"
+          formControlName="responsavel"
+          p-label="Responsável"
+          p-placeholder="Nome do responsável pela subtarefa"
+          [p-maxlength]="50"
+          p-required="true"
+        >
+        </po-input>
+      </div>
+    </div>
+
+    <!-- ── Seção 2: Status e Data ─────────────────────────────── -->
+    <div class="sf-section">
+      <div class="sf-section__titulo">
+        <span class="po-icon po-icon-calendar"></span>
+        Status e Prazo
+      </div>
+
+      <!-- Status | Data de Conclusão (2 colunas iguais) -->
+      <div class="sf-row">
+        <div class="sf-col">
+          <po-select
+            id="subtarefa-status"
+            name="status"
+            formControlName="status"
+            p-label="Status"
+            [p-options]="statusOptions"
+            [p-required]="true"
+          >
+          </po-select>
+        </div>
+        <div class="sf-col">
+          <po-datepicker
+            id="subtarefa-data-conclusao"
+            name="dataConclusao"
+            formControlName="dataConclusao"
+            p-label="Data de Conclusão"
+            p-placeholder="dd/mm/aaaa"
+          >
+          </po-datepicker>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</po-modal>

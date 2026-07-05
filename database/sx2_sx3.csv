@@ -1,0 +1,37 @@
+============================================================
+DICIONÁRIO DE DADOS — GERENCIADOR DE TAREFAS
+Projeto : Desafio Fullstack Angular + ADVPL
+Tabelas : ZZG (Tarefas) | ZZH (SubTarefas)
+============================================================
+
+SX2 — TABELAS
+============================================================
+X2_CHAVE,X2_NOME,X2_UNICO,X2_PRGINT,X2_MODULO
+ZZG,Tarefas,ZZG_FILIAL+ZZG_CODIGO,ZZGTAREFA,EST
+ZZH,SubTarefas,ZZH_FILIAL+ZZH_CODIGO,ZZGTAREFA,EST
+
+============================================================
+SX3 — CAMPOS DA TABELA ZZG (TAREFAS)
+============================================================
+X3_ARQUIVO,X3_CAMPO,X3_TIPO,X3_TAMANHO,X3_DECIMAL,X3_TITULO,X3_DESCRIC,X3_PICTURE,X3_VALID,X3_RELACAO,X3_F3,X3_NIVEL,X3_RESERV,X3_CHECK,X3_TRIGGER,X3_BROWSE,X3_VISUAL,X3_CONTEXT,X3_OBRIGAT,X3_VLDUSER,X3_WHEN,X3_INIBRW,X3_GRPSXG,X3_FOLDER,X3_PYME,X3_CBOX,X3_CBOXN,X3_IPIEXE,X3_INIPAD,X3_PROPRI,X3_MODI,X3_COPY
+ZZG,ZZG_FILIAL,C,2,0,Filial,Filial do Registro,,,,, 1,,,,,,,N,,,,,,S,,,,,,,
+ZZG,ZZG_CODIGO,C,6,0,Código,Código da Tarefa,@!,,,,1,,,,.T.,,.A.,S,,,,,,S,,,,,,,
+ZZG,ZZG_TITULO,C,50,0,Título,Título da Tarefa,@!,,,,1,,,,.T.,,.A.,S,,,,,,S,,,,,,,
+ZZG,ZZG_RESPON,C,50,0,Responsável,Responsável pela Tarefa,@!,,,,1,,,,.T.,,.A.,S,,,,,,S,,,,,,,
+ZZG,ZZG_DESCRI,M,10,0,Descrição,Descrição Detalhada da Tarefa,,,,,1,,,,.T.,,.A.,S,,,,,,S,,,,,,,
+ZZG,ZZG_SITUAC,C,1,0,Situação,Situação da Tarefa,@!,Pertence("1234"),,, 1,,,,.T.,,.A.,S,,,,,,S,1=Pendente;2=Andamento;3=Concluida;4=Cancelada,,,,,,
+ZZG,ZZG_USUINC,C,10,0,Usuário Inc.,Usuário de Inclusão,@!,,,,1,,,,,,.A.,S,,,,,,S,,,,,,,
+ZZG,ZZG_DTINC,D,8,0,Dt. Inclusão,Data de Inclusão,,,,,1,,,,.T.,,.A.,S,,,,,,S,,,,,,,
+ZZG,ZZG_DTCONC,D,8,0,Dt. Conclusão,Data de Conclusão,,ZZG_DTCONC>=ZZG_DTINC,,,1,,,,.T.,,.A.,N,,,,,,S,,,,,,,
+
+============================================================
+SX3 — CAMPOS DA TABELA ZZH (SUBTAREFAS)
+============================================================
+X3_ARQUIVO,X3_CAMPO,X3_TIPO,X3_TAMANHO,X3_DECIMAL,X3_TITULO,X3_DESCRIC,X3_PICTURE,X3_VALID,X3_RELACAO,X3_F3,X3_NIVEL,X3_RESERV,X3_CHECK,X3_TRIGGER,X3_BROWSE,X3_VISUAL,X3_CONTEXT,X3_OBRIGAT,X3_VLDUSER,X3_WHEN,X3_INIBRW,X3_GRPSXG,X3_FOLDER,X3_PYME,X3_CBOX,X3_CBOXN,X3_IPIEXE,X3_INIPAD,X3_PROPRI,X3_MODI,X3_COPY
+ZZH,ZZH_FILIAL,C,2,0,Filial,Filial do Registro,,,,, 1,,,,,,,N,,,,,,S,,,,,,,
+ZZH,ZZH_CODTAR,C,6,0,Cod. Tarefa,Código da Tarefa Pai,@!,,ZZG,,1,,,,.T.,,.A.,S,,,,,,S,,,,,,,
+ZZH,ZZH_CODIGO,C,6,0,Código,Código da SubTarefa,@!,,,,1,,,,.T.,,.A.,S,,,,,,S,,,,,,,
+ZZH,ZZH_DESCRI,C,50,0,Descrição,Descrição da SubTarefa,@!,,,,1,,,,.T.,,.A.,S,,,,,,S,,,,,,,
+ZZH,ZZH_RESPON,C,50,0,Responsável,Responsável pela SubTarefa,@!,,,,1,,,,.T.,,.A.,S,,,,,,S,,,,,,,
+ZZH,ZZH_STATUS,C,1,0,Status,Status da SubTarefa,@!,Pertence("1234"),,, 1,,,,.T.,,.A.,S,,,,,,S,1=Pendente;2=Andamento;3=Concluida;4=Cancelada,,,,,,
+ZZH,ZZH_DTCONC,D,8,0,Dt. Conclusão,Data de Conclusão da SubTarefa,,,,,1,,,,,,.A.,N,,,,,,S,,,,,,,

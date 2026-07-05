@@ -1,1 +1,92 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ─── Typography & Global Reset ─── */
+body, html, input, button, select, textarea, .po-font-text, .po-font-title, .po-table, .po-page-header-title {
+  font-family: 'Outfit', sans-serif !important;
+}
+
+body {
+  background-color: #f8fafc !important; /* Off-white moderno */
+  color: #1e293b !important;
+}
+
+/* ─── Adjusting App Container Spacing ─── */
+.app-container {
+  padding: 24px 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ─── PO-UI Component Customizations for Premium Feel ─── */
+
+/* Toolbar customization */
+.po-toolbar {
+  background-image: linear-gradient(135deg, #0f172a, #1e293b) !important; /* Dark slate */
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15) !important;
+  border-bottom: 1px solid #334155 !important;
+}
+
+.po-toolbar-title-content {
+  font-weight: 700 !important;
+  letter-spacing: 0.5px;
+  color: #f8fafc !important;
+}
+
+/* Container / Cards */
+.po-container {
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+  background-color: #ffffff !important;
+  padding: 20px !important;
+  margin-bottom: 24px !important;
+}
+
+/* Customizing Buttons to look modern and rounded */
+.po-button {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.po-button-primary {
+  background-color: #2563eb !important; /* Royal Blue */
+  border-color: #2563eb !important;
+}
+
+.po-button-primary:hover {
+  background-color: #1d4ed8 !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
+}
+
+/* Soft table improvements */
+.po-table-container {
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+  background-color: #ffffff !important;
+}
+
+.po-table-header {
+  background-color: #f1f5f9 !important;
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+.po-table-row:hover {
+  background-color: #f8fafc !important;
+}
+
+/* Customizing page title container */
+.po-page-header {
+  padding-bottom: 16px !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+  margin-bottom: 24px !important;
+}
+
+.po-page-header-title {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+}

@@ -1,0 +1,159 @@
+<po-page-list
+  p-title="Gerenciador de Tarefas"
+  [p-actions]="acoespagina"
+>
+
+  <!-- ─── Cards de Resumo por Situação ─── -->
+  <div class="resumo-cards po-row" style="margin-bottom: 16px;">
+
+    <div class="po-col-lg-3 po-col-md-6 po-col-12">
+      <div class="resumo-card resumo-card--pendente" (click)="filtrarPorSituacao('1')">
+        <span class="po-icon po-icon-clock resumo-card__icone"></span>
+        <div class="resumo-card__info">
+          <span class="resumo-card__valor">{{ contagem.pendente }}</span>
+          <span class="resumo-card__label">Pendentes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="po-col-lg-3 po-col-md-6 po-col-12">
+      <div class="resumo-card resumo-card--andamento" (click)="filtrarPorSituacao('2')">
+        <span class="po-icon po-icon-settings resumo-card__icone"></span>
+        <div class="resumo-card__info">
+          <span class="resumo-card__valor">{{ contagem.andamento }}</span>
+          <span class="resumo-card__label">Em Andamento</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="po-col-lg-3 po-col-md-6 po-col-12">
+      <div class="resumo-card resumo-card--concluida" (click)="filtrarPorSituacao('3')">
+        <span class="po-icon po-icon-ok resumo-card__icone"></span>
+        <div class="resumo-card__info">
+          <span class="resumo-card__valor">{{ contagem.concluida }}</span>
+          <span class="resumo-card__label">Concluídas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="po-col-lg-3 po-col-md-6 po-col-12">
+      <div class="resumo-card resumo-card--cancelada" (click)="filtrarPorSituacao('4')">
+        <span class="po-icon po-icon-close resumo-card__icone"></span>
+        <div class="resumo-card__info">
+          <span class="resumo-card__valor">{{ contagem.cancelada }}</span>
+          <span class="resumo-card__label">Canceladas</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── Área de Filtros ─── -->
+  <po-container>
+    <div class="po-row">
+
+      <!-- Filtro por Título -->
+      <div class="po-col-lg-4 po-col-md-6 po-col-12">
+        <po-input
+          id="filtro-titulo"
+          name="filtroTitulo"
+          [(ngModel)]="filtroTitulo"
+          p-label="Título"
+          p-placeholder="Filtrar por título"
+          (p-enter)="pesquisar()"
+        >
+        </po-input>
+      </div>
+
+      <!-- Filtro por Descrição -->
+      <div class="po-col-lg-4 po-col-md-6 po-col-12">
+        <po-input
+          id="filtro-descricao"
+          name="filtroDescricao"
+          [(ngModel)]="filtroDescricao"
+          p-label="Descrição"
+          p-placeholder="Filtrar por descrição"
+          (p-enter)="pesquisar()"
+        >
+        </po-input>
+      </div>
+
+      <!-- Filtro por Situação -->
+      <div class="po-col-lg-4 po-col-md-6 po-col-12">
+        <po-select
+          id="filtro-situacao"
+          name="filtroSituacao"
+          [ngModel]="filtroSituacao"
+          (p-change)="filtroSituacao = $event"
+          p-label="Situação"
+          [p-options]="situacaoOptions"
+        >
+        </po-select>
+      </div>
+
+    </div>
+
+    <!-- Botões de pesquisa -->
+    <div class="po-row" style="margin-top: 4px;">
+      <div class="po-col-12" style="display: flex; gap: 8px; justify-content: flex-end;">
+        <po-button
+          id="btn-limpar-filtros"
+          p-label="Limpar"
+          p-icon="po-icon-close"
+          (p-click)="limparFiltros()"
+        >
+        </po-button>
+        <po-button
+          id="btn-pesquisar"
+          p-label="Pesquisar"
+          p-icon="po-icon-search"
+          p-type="primary"
+          (p-click)="pesquisar()"
+        >
+        </po-button>
+      </div>
+    </div>
+  </po-container>
+
+  <!-- ─── Tabela de Tarefas ─── -->
+  <po-table
+    id="table-tarefas"
+    [p-columns]="colunas"
+    [p-items]="tarefas"
+    [p-actions]="acoes"
+    [p-loading]="isLoading"
+    [p-striped]="true"
+    [p-sort]="true"
+    [p-literals]="literais"
+    (click)="onTableClick($event)"
+  >
+  </po-table>
+
+</po-page-list>
+
+<!-- ─── Modal de Confirmação de Exclusão ─── -->
+<po-modal
+  id="modal-excluir-tarefa"
+  p-title="Confirmar Exclusão"
+  [p-primary-action]="acaoConfirmarExclusao"
+  [p-secondary-action]="acaoCancelarExclusao"
+  #modalExcluirRef
+>
+  <div style="display: flex; align-items: flex-start; gap: 16px;">
+    <span class="po-icon po-icon-warning" style="font-size: 32px; color: #f44336;"></span>
+    <div>
+      <p><strong>Deseja realmente excluir esta tarefa?</strong></p>
+      <p style="color: var(--color-neutral-dark-30);">
+        Todas as subtarefas vinculadas também serão removidas permanentemente.
+      </p>
+    </div>
+  </div>
+</po-modal>
+
+<!-- ─── Modal de Tarefa (Inclusão / Edição) ─── -->
+<app-tarefa-form
+  [tarefaEdicao]="tarefaEmEdicao"
+  [isOpen]="modalTarefaAberta"
+  (fechar)="onTarefaFormFechado($event)"
+>
+</app-tarefa-form>

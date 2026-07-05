@@ -1,0 +1,44 @@
+/* ─── Layout do formulário de subtarefa ─── */
+
+.sf-section {
+  background: #f8f9fb;
+  border: 1px solid #e8eaed;
+  border-radius: 8px;
+  padding: 16px 20px 8px;
+  margin-bottom: 8px;
+}
+
+.sf-section__titulo {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #6b7280;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sf-section__titulo::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e8eaed;
+}
+
+.sf-field {
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.sf-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.sf-col {
+  flex: 1;
+  min-width: 0;
+}

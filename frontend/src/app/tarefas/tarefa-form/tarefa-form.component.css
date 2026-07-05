@@ -1,0 +1,68 @@
+/* ─── Layout do formulário (flexbox confiável dentro de po-modal) ─── */
+
+.tf-field {
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.tf-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.tf-col {
+  flex: 1;
+  min-width: 0; /* evita overflow em telas menores */
+}
+
+/* ─── Seções visuais ──────────────────────────────────────────────── */
+.tf-section {
+  background: #f8f9fb;
+  border: 1px solid #e8eaed;
+  border-radius: 8px;
+  padding: 16px 20px 8px;
+  margin-bottom: 16px;
+}
+
+.tf-section__titulo {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #6b7280;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tf-section__titulo::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e8eaed;
+}
+
+/* ─── Badge de situação na seção de status ─────────────────────── */
+.tf-status-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+/* ─── Seção de subtarefas ────────────────────────────────────────── */
+.tf-subtarefas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.tf-subtarefas-info {
+  font-size: 13px;
+  color: #6b7280;
+}
