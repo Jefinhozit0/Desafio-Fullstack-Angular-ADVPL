@@ -8,7 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subtarefa, STATUS_OPTIONS } from '../../models/subtarefa.model';
+import { STATUS_LABELS, STATUS_OPTIONS, Subtarefa } from '../../models/subtarefa.model';
 import { TarefaService } from '../../services/tarefa.service';
 import { PoNotificationService, PoModalComponent, PoModalAction } from '@po-ui/ng-components';
 
@@ -47,6 +47,29 @@ export class SubtarefaFormComponent implements OnChanges {
 
   get tituloModal(): string {
     return this.modoEdicao ? 'Editar Subtarefa' : 'Nova Subtarefa';
+  }
+
+  get codigoExibicao(): string {
+    return this.subtarefaEdicao?.codigo ?? 'Novo registro';
+  }
+
+  get statusAtual(): string {
+    return this.form?.get('status')?.value ?? this.subtarefaEdicao?.status ?? '1';
+  }
+
+  get statusAtualLabel(): string {
+    return STATUS_LABELS[this.statusAtual] ?? 'Pendente';
+  }
+
+  get statusAtualClasse(): string {
+    const classes: Record<string, string> = {
+      '1': 'task-status--warning',
+      '2': 'task-status--info',
+      '3': 'task-status--success',
+      '4': 'task-status--neutral',
+    };
+
+    return classes[this.statusAtual] ?? classes['1'];
   }
 
   get primaryAction(): PoModalAction {

@@ -8,7 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Tarefa, SITUACAO_OPTIONS } from '../../models/tarefa.model';
+import { SITUACAO_LABELS, SITUACAO_OPTIONS, Tarefa } from '../../models/tarefa.model';
 import { Subtarefa } from '../../models/subtarefa.model';
 import { TarefaService } from '../../services/tarefa.service';
 import {
@@ -17,6 +17,7 @@ import {
   PoTableAction,
   PoModalComponent,
   PoModalAction,
+  PoTableColumnSpacing,
 } from '@po-ui/ng-components';
 
 /**
@@ -43,6 +44,7 @@ export class TarefaFormComponent implements OnChanges {
   @ViewChild('modalExcluirSubtarefaRef') modalExcluirSubRef!: PoModalComponent;
 
   readonly situacaoOptions = SITUACAO_OPTIONS;
+  readonly tableSpacing = PoTableColumnSpacing.Small;
 
   /** Literais customizadas para o po-table de subtarefas */
   readonly literaisSubtarefas = { noData: 'Nenhuma subtarefa cadastrada.' };
@@ -97,6 +99,41 @@ export class TarefaFormComponent implements OnChanges {
 
   get tituloModal(): string {
     return this.modoEdicao ? 'Editar Tarefa' : 'Nova Tarefa';
+  }
+
+  get codigoExibicao(): string {
+    return this.tarefaEdicao?.codigo ?? 'Novo registro';
+  }
+
+  get statusAtual(): string {
+    return this.form?.get('situacao')?.value ?? this.tarefaEdicao?.situacao ?? '1';
+  }
+
+  get statusAtualLabel(): string {
+    return SITUACAO_LABELS[this.statusAtual] ?? 'Pendente';
+  }
+
+  get statusAtualClasse(): string {
+    const classes: Record<string, string> = {
+      '1': 'task-status--warning',
+      '2': 'task-status--info',
+      '3': 'task-status--success',
+      '4': 'task-status--neutral',
+    };
+
+    return classes[this.statusAtual] ?? classes['1'];
+  }
+
+  get subtarefasConcluidas(): number {
+    return this.subtarefas.filter((subtarefa) => subtarefa.status === '3').length;
+  }
+
+  get percentualSubtarefas(): number {
+    if (!this.subtarefas.length) {
+      return 0;
+    }
+
+    return Math.round((this.subtarefasConcluidas / this.subtarefas.length) * 100);
   }
 
   get primaryAction(): PoModalAction {

@@ -1,11 +1,33 @@
-<po-toolbar
-  id="toolbar-principal"
-  p-title="Gerenciador de Tarefas"
-  [p-show-notification]="false"
->
-</po-toolbar>
+<div class="app-shell">
+  <section class="app-brandbar" aria-label="Identidade do sistema">
+    <div class="app-brandbar__identity">
+      <img class="app-brandbar__logo" src="assets/totvs.svg" alt="TOTVS" />
+      <div class="app-brandbar__copy">
+        <span class="app-brandbar__product">TOTVS Protheus</span>
+        <strong class="app-brandbar__title">Gestão de Tarefas ADVPL</strong>
+      </div>
+    </div>
 
-<!-- Área principal com conteúdo das rotas -->
-<div class="app-container">
-  <router-outlet></router-outlet>
+    <div class="app-brandbar__meta">
+      <po-tag
+        p-value="REST"
+        p-icon="po-icon-cloud"
+        p-color="#e8fbff"
+        p-text-color="#006c7a"
+      >
+      </po-tag>
+      <span class="app-brandbar__environment">Ambiente local</span>
+    </div>
+  </section>
+
+  <po-toolbar
+    id="toolbar-principal"
+    p-title="Gerenciador de Tarefas"
+    [p-show-notification]="false"
+  >
+  </po-toolbar>
+
+  <main class="app-container">
+    <router-outlet></router-outlet>
+  </main>
 </div>

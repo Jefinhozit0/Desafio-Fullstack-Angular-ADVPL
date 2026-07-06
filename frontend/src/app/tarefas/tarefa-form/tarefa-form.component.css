@@ -1,68 +1,175 @@
-/* ─── Layout do formulário (flexbox confiável dentro de po-modal) ─── */
-
-.tf-field {
-  margin-bottom: 4px;
-  width: 100%;
+.task-modal {
+  display: grid;
+  gap: 16px;
 }
 
-.tf-row {
+.task-modal__summary {
+  align-items: center;
+  background: #f7fbfc;
+  border: 1px solid #dce8ee;
+  border-radius: 8px;
   display: flex;
   gap: 16px;
-  margin-bottom: 4px;
-}
-
-.tf-col {
-  flex: 1;
-  min-width: 0; /* evita overflow em telas menores */
-}
-
-/* ─── Seções visuais ──────────────────────────────────────────────── */
-.tf-section {
-  background: #f8f9fb;
-  border: 1px solid #e8eaed;
-  border-radius: 8px;
-  padding: 16px 20px 8px;
-  margin-bottom: 16px;
-}
-
-.tf-section__titulo {
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: #6b7280;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tf-section__titulo::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: #e8eaed;
-}
-
-/* ─── Badge de situação na seção de status ─────────────────────── */
-.tf-status-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: #9ca3af;
-  margin-bottom: 4px;
-}
-
-/* ─── Seção de subtarefas ────────────────────────────────────────── */
-.tf-subtarefas-header {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  padding: 14px 16px;
 }
 
-.tf-subtarefas-info {
+.task-modal__summary-main {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.task-modal__summary-main strong {
+  color: #18313f;
+  font-size: 18px;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-modal__summary-main span:last-child {
+  color: #647987;
   font-size: 13px;
-  color: #6b7280;
+}
+
+.task-modal__code {
+  color: #0c9abe;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.task-status {
+  align-items: center;
+  border-radius: 8px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 6px;
+  min-height: 32px;
+  padding: 6px 10px;
+}
+
+.task-status--warning {
+  background: #fff3d6;
+  color: #8a5a00;
+}
+
+.task-status--info {
+  background: #e8fbff;
+  color: #006c7a;
+}
+
+.task-status--success {
+  background: #e7f7ef;
+  color: #176941;
+}
+
+.task-status--neutral {
+  background: #eef3f6;
+  color: #536b7a;
+}
+
+.form-section {
+  border: 1px solid #dce8ee;
+  border-radius: 8px;
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.form-section + .form-section {
+  margin-top: 16px;
+}
+
+.form-section__title {
+  align-items: center;
+  color: #244554;
+  display: flex;
+  gap: 10px;
+}
+
+.form-section__title .po-icon {
+  align-items: center;
+  background: #e8fbff;
+  border-radius: 8px;
+  color: #0c9abe;
+  display: inline-flex;
+  font-size: 20px;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+}
+
+.form-section__title strong {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.form-grid--task-main {
+  grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+}
+
+.form-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.form-section--subtasks {
+  background: #fbfdfe;
+}
+
+.subtasks-toolbar {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.subtasks-toolbar__progress {
+  display: grid;
+  flex: 1;
+  gap: 8px;
+  min-width: 180px;
+}
+
+.subtasks-toolbar__progress div {
+  display: grid;
+  gap: 2px;
+}
+
+.subtasks-toolbar__progress strong {
+  color: #18313f;
+  font-size: 14px;
+}
+
+.subtasks-toolbar__progress span {
+  color: #647987;
+  font-size: 13px;
+}
+
+:host ::ng-deep .subtasks-toolbar po-progress {
+  --background-color-indicator: #1f8f5f;
+  --background-color-tray: #e7f7ef;
+}
+
+@media (max-width: 720px) {
+  .task-modal__summary,
+  .subtasks-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .form-grid--task-main,
+  .form-grid--three {
+    grid-template-columns: 1fr;
+  }
 }

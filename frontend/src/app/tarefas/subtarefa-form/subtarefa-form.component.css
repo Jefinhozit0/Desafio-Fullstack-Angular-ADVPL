@@ -1,44 +1,131 @@
-/* ─── Layout do formulário de subtarefa ─── */
-
-.sf-section {
-  background: #f8f9fb;
-  border: 1px solid #e8eaed;
-  border-radius: 8px;
-  padding: 16px 20px 8px;
-  margin-bottom: 8px;
+.subtask-modal {
+  display: grid;
+  gap: 16px;
 }
 
-.sf-section__titulo {
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: #6b7280;
-  margin-bottom: 12px;
-  display: flex;
+.subtask-modal__summary {
   align-items: center;
-  gap: 8px;
-}
-
-.sf-section__titulo::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: #e8eaed;
-}
-
-.sf-field {
-  margin-bottom: 4px;
-  width: 100%;
-}
-
-.sf-row {
+  background: #f7fbfc;
+  border: 1px solid #dce8ee;
+  border-radius: 8px;
   display: flex;
   gap: 16px;
-  margin-bottom: 4px;
+  justify-content: space-between;
+  padding: 14px 16px;
 }
 
-.sf-col {
-  flex: 1;
+.subtask-modal__summary-main {
+  display: grid;
+  gap: 3px;
   min-width: 0;
+}
+
+.subtask-modal__summary-main strong {
+  color: #18313f;
+  font-size: 17px;
+  line-height: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subtask-modal__summary-main span:last-child,
+.subtask-modal__code {
+  font-size: 13px;
+}
+
+.subtask-modal__summary-main span:last-child {
+  color: #647987;
+}
+
+.subtask-modal__code {
+  color: #0c9abe;
+  font-weight: 700;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.task-status {
+  align-items: center;
+  border-radius: 8px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 6px;
+  min-height: 32px;
+  padding: 6px 10px;
+}
+
+.task-status--warning {
+  background: #fff3d6;
+  color: #8a5a00;
+}
+
+.task-status--info {
+  background: #e8fbff;
+  color: #006c7a;
+}
+
+.task-status--success {
+  background: #e7f7ef;
+  color: #176941;
+}
+
+.task-status--neutral {
+  background: #eef3f6;
+  color: #536b7a;
+}
+
+.subtask-section {
+  border: 1px solid #dce8ee;
+  border-radius: 8px;
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.subtask-section + .subtask-section {
+  margin-top: 16px;
+}
+
+.subtask-section__title {
+  align-items: center;
+  color: #244554;
+  display: flex;
+  gap: 10px;
+}
+
+.subtask-section__title .po-icon {
+  align-items: center;
+  background: #e8fbff;
+  border-radius: 8px;
+  color: #0c9abe;
+  display: inline-flex;
+  font-size: 20px;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+}
+
+.subtask-section__title strong {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.subtask-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  .subtask-modal__summary {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .subtask-grid {
+    grid-template-columns: 1fr;
+  }
 }
