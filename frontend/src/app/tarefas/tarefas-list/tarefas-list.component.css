@@ -1,118 +1,25 @@
-/* ─── Grid de Cards de Resumo ───────────────────────────────────── */
-.resumo-cards {
-  margin-top: 8px;
-}
-
-.resumo-card {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 20px 24px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-bottom: 16px;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Efeito sutil de background gloss */
-.resumo-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%);
-  pointer-events: none;
-}
-
-/* Hover Animado */
-.resumo-card:hover {
-  transform: translateY(-4px) scale(1.02);
-}
-
-.resumo-card:active {
-  transform: translateY(0) scale(1);
-}
-
-.resumo-card__icone {
-  font-size: 36px;
-  opacity: 0.95;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 12px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-.resumo-card__info {
-  display: flex;
-  flex-direction: column;
-}
-
-.resumo-card__valor {
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.5px;
-}
-
-.resumo-card__label {
-  font-size: 14px;
-  font-weight: 500;
-  opacity: 0.9;
-  margin-top: 2px;
-  letter-spacing: 0.2px;
-}
-
-/* ─── Cores e Efeitos de Brilho (Glow) por Status ───────────────── */
-
-/* 1 - Pendente (Orange Glow) */
-.resumo-card--pendente {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-}
-.resumo-card--pendente:hover {
-  box-shadow: 0 10px 20px -5px rgba(217, 119, 6, 0.4), 0 4px 6px -2px rgba(217, 119, 6, 0.2);
-}
-
-/* 2 - Em Andamento (Blue Glow) */
-.resumo-card--andamento {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-}
-.resumo-card--andamento:hover {
-  box-shadow: 0 10px 20px -5px rgba(29, 78, 216, 0.4), 0 4px 6px -2px rgba(29, 78, 216, 0.2);
-}
-
-/* 3 - Concluída (Green Glow) */
-.resumo-card--concluida {
-  background: linear-gradient(135deg, #10b981, #059669);
-}
-.resumo-card--concluida:hover {
-  box-shadow: 0 10px 20px -5px rgba(5, 150, 105, 0.4), 0 4px 6px -2px rgba(5, 150, 105, 0.2);
-}
-
-/* 4 - Cancelada (Dark Grey Glow) */
-.resumo-card--cancelada {
-  background: linear-gradient(135deg, #64748b, #475569);
-}
-.resumo-card--cancelada:hover {
-  box-shadow: 0 10px 20px -5px rgba(71, 85, 105, 0.4), 0 4px 6px -2px rgba(71, 85, 105, 0.2);
-}
-
-/* ─── Ajuste fino de padding para o formulário de pesquisa ─────── */
-po-container {
+:host {
   display: block;
-  margin-top: 8px;
+  min-height: 0;
+  overflow: visible;
 }
 
-/* ─── Linhas da Tabela Clicáveis ───────────────────────────────── */
-::ng-deep #table-tarefas .po-table-row {
-  cursor: pointer !important;
+.tarefas-panel-scroll {
+  background: #ffffff;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.tarefas-panel-scroll::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+:host ::ng-deep po-page-list,
+:host ::ng-deep po-page,
+:host ::ng-deep po-page-content,
+:host ::ng-deep .po-page,
+:host ::ng-deep .po-page-content {
+  display: block;
+  min-height: 0;
+  overflow: visible !important;
 }

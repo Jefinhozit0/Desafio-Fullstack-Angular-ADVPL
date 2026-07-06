@@ -1,92 +1,474 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
-/* ─── Typography & Global Reset ─── */
-body, html, input, button, select, textarea, .po-font-text, .po-font-title, .po-table, .po-page-header-title {
-  font-family: 'Outfit', sans-serif !important;
+:root {
+  --app-bg: #f7f9fc;
+  --app-surface: #ffffff;
+  --app-border: #dce8ee;
+  --app-text: #18313f;
+  --app-muted: #647987;
+  --app-brand: #0c9abe;
+  --app-brand-dark: #006c7a;
+  --app-shadow: 0 10px 24px rgba(23, 49, 64, 0.08);
+  --font-family-theme: 'Outfit', Arial, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body,
+input,
+button,
+select,
+textarea,
+.po-font-text,
+.po-font-title,
+.po-table,
+.po-page-header-title {
+  font-family: 'Outfit', Arial, sans-serif !important;
 }
 
 body {
-  background-color: #f8fafc !important; /* Off-white moderno */
-  color: #1e293b !important;
+  background: var(--app-bg) !important;
+  color: var(--app-text) !important;
 }
 
-/* ─── Adjusting App Container Spacing ─── */
-.app-container {
-  padding: 24px 32px;
-  max-width: 1400px;
-  margin: 0 auto;
+app-root {
+  display: block;
+  height: 100%;
+  overflow: hidden;
 }
 
-/* ─── PO-UI Component Customizations for Premium Feel ─── */
+.app-shell {
+  scrollbar-color: #006c7a #e8f4f8;
+  scrollbar-width: auto;
+}
 
-/* Toolbar customization */
+.app-shell::-webkit-scrollbar {
+  width: 18px;
+}
+
+.app-shell::-webkit-scrollbar-track {
+  background: #e8f4f8;
+  border-left: 1px solid #d2e8ef;
+}
+
+.app-shell::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0c9abe, #006c7a);
+  border: 5px solid #e8f4f8;
+  border-radius: 999px;
+}
+
+.app-shell::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0aaed8, #005b68);
+}
+
+#table-tarefas,
+#table-tarefas * {
+  scrollbar-color: #7aaabc #edf7fa;
+  scrollbar-width: thin;
+}
+
+#table-tarefas *::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+#table-tarefas *::-webkit-scrollbar-track {
+  background: #edf7fa;
+  border-radius: 999px;
+}
+
+#table-tarefas *::-webkit-scrollbar-thumb {
+  background: #7aaabc;
+  border: 2px solid #edf7fa;
+  border-radius: 999px;
+}
+
+#table-tarefas *::-webkit-scrollbar-thumb:hover {
+  background: var(--app-brand);
+}
+
 .po-toolbar {
-  background-image: linear-gradient(135deg, #0f172a, #1e293b) !important; /* Dark slate */
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15) !important;
-  border-bottom: 1px solid #334155 !important;
+  background: #18313f !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 8px 22px rgba(24, 49, 63, 0.16) !important;
 }
 
+.po-toolbar-title,
 .po-toolbar-title-content {
+  color: #ffffff !important;
   font-weight: 700 !important;
-  letter-spacing: 0.5px;
-  color: #f8fafc !important;
+  letter-spacing: 0.4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.22);
 }
 
-/* Container / Cards */
-.po-container {
-  border-radius: 12px !important;
-  border: 1px solid #e2e8f0 !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
-  background-color: #ffffff !important;
-  padding: 20px !important;
-  margin-bottom: 24px !important;
-}
-
-/* Customizing Buttons to look modern and rounded */
-.po-button {
-  border-radius: 8px !important;
-  font-weight: 500 !important;
-  transition: all 0.2s ease-in-out !important;
-}
-
-.po-button-primary {
-  background-color: #2563eb !important; /* Royal Blue */
-  border-color: #2563eb !important;
-}
-
-.po-button-primary:hover {
-  background-color: #1d4ed8 !important;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
-}
-
-/* Soft table improvements */
-.po-table-container {
-  border-radius: 12px !important;
-  border: 1px solid #e2e8f0 !important;
-  overflow: hidden !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
-  background-color: #ffffff !important;
-}
-
-.po-table-header {
-  background-color: #f1f5f9 !important;
-  color: #475569 !important;
-  font-weight: 600 !important;
-}
-
-.po-table-row:hover {
-  background-color: #f8fafc !important;
-}
-
-/* Customizing page title container */
 .po-page-header {
-  padding-bottom: 16px !important;
-  border-bottom: 2px solid #e2e8f0 !important;
-  margin-bottom: 24px !important;
+  border-bottom: 0 !important;
+  margin-bottom: 10px !important;
+  padding-bottom: 0 !important;
 }
 
 .po-page-header-title {
-  font-size: 28px !important;
+  color: var(--app-text) !important;
+  font-size: 24px !important;
   font-weight: 700 !important;
-  color: #0f172a !important;
+}
+
+.po-button {
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+}
+
+.po-button-primary {
+  background: var(--app-brand) !important;
+  border-color: var(--app-brand) !important;
+}
+
+.po-button-primary:hover {
+  background: var(--app-brand-dark) !important;
+  border-color: var(--app-brand-dark) !important;
+}
+
+.po-input,
+.po-select-button,
+.po-textarea,
+.po-datepicker-field {
+  border-radius: 8px !important;
+}
+
+.po-modal-content {
+  border-radius: 8px !important;
+  box-shadow: 0 24px 70px rgba(24, 49, 63, 0.28) !important;
+}
+
+.overview-grid {
+  margin: 0 0 8px;
+}
+
+.status-cards-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.status-widget {
+  --status-color: var(--app-brand);
+  --status-ring: rgba(12, 154, 190, 0.16);
+  --status-track: #e8fbff;
+  display: block;
+  margin-bottom: 0;
+  min-width: 0;
+  width: 100%;
+}
+
+.status-widget--pending {
+  --status-color: #c64840;
+  --status-ring: rgba(198, 72, 64, 0.16);
+  --status-track: #fff1f1;
+}
+
+.status-widget--progress {
+  --status-color: #ea8b21;
+  --status-ring: rgba(234, 139, 33, 0.18);
+  --status-track: #fff3df;
+}
+
+.status-widget--success {
+  --status-color: #1f8f5f;
+  --status-ring: rgba(31, 143, 95, 0.16);
+  --status-track: #e7f7ef;
+}
+
+.status-widget--canceled {
+  --status-color: #a94499;
+  --status-ring: rgba(169, 68, 153, 0.16);
+  --status-track: #faeef8;
+}
+
+.status-widget .po-widget {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  border-top: 4px solid var(--status-color);
+  height: 100%;
+  overflow: hidden;
+  transition: box-shadow 160ms ease, transform 160ms ease, border-color 160ms ease;
+}
+
+.status-widget .po-container {
+  overflow: hidden !important;
+  padding: 10px 14px 12px !important;
+}
+
+.status-widget .po-widget-body {
+  overflow: hidden !important;
+}
+
+.status-widget .po-widget-header {
+  color: #244554;
+  font-weight: 700;
+  padding: 12px 14px 6px !important;
+}
+
+.status-widget .po-widget:hover {
+  border-color: var(--status-color);
+  box-shadow: 0 12px 28px rgba(23, 49, 64, 0.12);
+  transform: translateY(-2px);
+}
+
+.status-widget.status-widget--active .po-widget {
+  border-color: var(--status-color);
+  box-shadow: 0 0 0 2px var(--status-ring);
+}
+
+.status-widget__body {
+  display: grid;
+  gap: 8px;
+}
+
+.status-widget__main,
+.status-widget__meta,
+.filter-panel__header,
+.table-panel__header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.status-widget__icon {
+  align-items: center;
+  background: var(--status-track);
+  border-radius: 8px;
+  color: var(--status-color);
+  display: inline-flex;
+  font-size: 22px;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.status-widget__value {
+  color: var(--app-text);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.status-widget__meta {
+  color: #536b7a;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 8px;
+  min-width: 0;
+}
+
+.status-widget__meta span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-widget po-progress {
+  --background-color-indicator: var(--status-color);
+  --background-color-tray: var(--status-track);
+}
+
+.filter-panel {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.filter-panel .po-container,
+#table-tarefas .po-table-container {
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  box-shadow: var(--app-shadow);
+  overflow: hidden;
+}
+
+.filter-panel .po-container {
+  padding: 14px 16px;
+}
+
+.filter-panel__header {
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.filter-panel__title {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.filter-panel__title > .po-icon {
+  align-items: center;
+  background: #e8fbff;
+  border-radius: 8px;
+  color: var(--app-brand);
+  display: inline-flex;
+  font-size: 20px;
+  height: 34px;
+  justify-content: center;
+  width: 34px;
+}
+
+.filter-panel__title div,
+.table-panel__header div {
+  display: grid;
+  gap: 2px;
+}
+
+.filter-panel__title strong {
+  color: var(--app-text);
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.filter-panel__title span,
+.table-panel__hint {
+  color: var(--app-muted);
+  font-size: 13px;
+}
+
+.filter-panel__chips {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.filter-panel__fields {
+  row-gap: 12px;
+}
+
+.filter-panel__content {
+  align-items: end;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.filter-panel__actions {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+.table-panel {
+  display: grid;
+  gap: 8px;
+  min-height: 0;
+}
+
+.table-panel__table {
+  min-height: 0;
+}
+
+.table-panel__header {
+  align-items: flex-end;
+}
+
+.table-panel__eyebrow {
+  color: var(--app-muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.table-panel__header strong {
+  color: var(--app-text);
+  font-size: 15px;
+  line-height: 20px;
+}
+
+#table-tarefas .po-table-header {
+  background: #f1f7fa;
+}
+
+#table-tarefas .po-table-row {
+  cursor: pointer;
+}
+
+#table-tarefas .po-table-row:hover td {
+  background: #f8fcfd;
+}
+
+.delete-dialog {
+  align-items: flex-start;
+  display: flex;
+  gap: 16px;
+}
+
+.delete-dialog__icon {
+  align-items: center;
+  background: #fff1f1;
+  border-radius: 8px;
+  color: #c64840;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 28px;
+  height: 48px;
+  justify-content: center;
+  width: 48px;
+}
+
+.delete-dialog__content {
+  color: #244554;
+  display: grid;
+  gap: 6px;
+}
+
+.delete-dialog__content strong {
+  color: var(--app-text);
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.delete-dialog__content p {
+  color: var(--app-muted);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .status-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-panel__header,
+  .table-panel__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .filter-panel__chips {
+    justify-content: flex-start;
+  }
+
+  .filter-panel__actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+  .filter-panel__content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .status-cards-grid {
+    grid-template-columns: 1fr;
+  }
 }

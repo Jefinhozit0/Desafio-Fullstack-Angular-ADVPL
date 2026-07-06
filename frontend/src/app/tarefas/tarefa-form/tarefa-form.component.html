@@ -1,77 +1,79 @@
-<!-- ════════════════════════════════════════════════════
-     Modal principal: Tarefa
-     ════════════════════════════════════════════════════ -->
 <po-modal
   id="modal-tarefa"
   [p-title]="tituloModal"
+  p-icon="po-icon-document"
   [p-hide-close]="false"
   [p-primary-action]="primaryAction"
   [p-secondary-action]="secondaryAction"
-  p-size="lg"
+  p-size="xl"
   #modalTarefaRef
 >
-  <form [formGroup]="form">
-
-    <!-- ── Seção 1: Dados da Tarefa ──────────────────────────── -->
-    <div class="tf-section">
-      <div class="tf-section__titulo">
-        <span class="po-icon po-icon-document"></span>
-        Dados da Tarefa
+  <div class="task-modal">
+    <header class="task-modal__summary">
+      <div class="task-modal__summary-main">
+        <span class="task-modal__code">{{ codigoExibicao }}</span>
+        <strong>{{ form.get('titulo')?.value || tituloModal }}</strong>
+        <span>{{ modoEdicao ? 'Registro existente' : 'Novo registro' }}</span>
       </div>
 
-      <!-- Título & Responsável (2 colunas) -->
-      <div class="tf-row">
-        <div style="flex: 2; min-width: 0;">
+      <span class="task-status" [ngClass]="statusAtualClasse">
+        <span class="po-icon po-icon-info"></span>
+        {{ statusAtualLabel }}
+      </span>
+    </header>
+
+    <form [formGroup]="form">
+      <section class="form-section">
+        <div class="form-section__title">
+          <span class="po-icon po-icon-document"></span>
+          <strong>Dados da tarefa</strong>
+        </div>
+
+        <div class="form-grid form-grid--task-main">
           <po-input
             id="tarefa-titulo"
             name="titulo"
             formControlName="titulo"
             p-label="Título"
             p-placeholder="Informe o título da tarefa"
+            p-icon="po-icon-document"
             [p-maxlength]="50"
             p-required="true"
           >
           </po-input>
-        </div>
-        <div style="flex: 1; min-width: 0;">
+
           <po-input
             id="tarefa-responsavel"
             name="responsavel"
             formControlName="responsavel"
             p-label="Responsável"
             p-placeholder="Nome do responsável"
+            p-icon="po-icon-user"
             [p-maxlength]="50"
             p-required="true"
           >
           </po-input>
         </div>
-      </div>
 
-      <!-- Descrição (largura total) -->
-      <div class="tf-field">
         <po-textarea
           id="tarefa-descricao"
           name="descricao"
           formControlName="descricao"
           p-label="Descrição"
-          p-placeholder="Descreva os detalhes e objetivo desta tarefa..."
+          p-placeholder="Descreva os detalhes e objetivo desta tarefa"
           [p-required]="true"
-          [p-rows]="4"
+          [p-rows]="5"
         >
         </po-textarea>
-      </div>
-    </div>
+      </section>
 
-    <!-- ── Seção 2: Status e Datas ───────────────────────────── -->
-    <div class="tf-section">
-      <div class="tf-section__titulo">
-        <span class="po-icon po-icon-calendar"></span>
-        Status e Datas
-      </div>
+      <section class="form-section">
+        <div class="form-section__title">
+          <span class="po-icon po-icon-calendar"></span>
+          <strong>Status e datas</strong>
+        </div>
 
-      <!-- Situação | Data de Inclusão | Data de Conclusão (3 colunas iguais) -->
-      <div class="tf-row">
-        <div class="tf-col">
+        <div class="form-grid form-grid--three">
           <po-select
             id="tarefa-situacao"
             name="situacao"
@@ -81,8 +83,7 @@
             [p-required]="true"
           >
           </po-select>
-        </div>
-        <div class="tf-col">
+
           <po-datepicker
             id="tarefa-data-inclusao"
             name="dataInclusao"
@@ -92,8 +93,7 @@
             p-required="true"
           >
           </po-datepicker>
-        </div>
-        <div class="tf-col">
+
           <po-datepicker
             id="tarefa-data-conclusao"
             name="dataConclusao"
@@ -103,29 +103,33 @@
           >
           </po-datepicker>
         </div>
-      </div>
-    </div>
+      </section>
+    </form>
 
-  </form>
-
-  <!-- ── Seção de SubTarefas (somente no modo edição) ────────── -->
-  <ng-container *ngIf="modoEdicao">
-    <div class="tf-section">
-      <div class="tf-section__titulo">
+    <section class="form-section form-section--subtasks" *ngIf="modoEdicao">
+      <div class="form-section__title">
         <span class="po-icon po-icon-list"></span>
-        Subtarefas
+        <strong>Subtarefas</strong>
       </div>
 
-      <div class="tf-subtarefas-header">
-        <span class="tf-subtarefas-info">
-          <strong>{{ subtarefas.length }}</strong> subtarefa(s) cadastrada(s)
-        </span>
+      <div class="subtasks-toolbar">
+        <div class="subtasks-toolbar__progress">
+          <div>
+            <strong>{{ subtarefasConcluidas }} de {{ subtarefas.length }} concluída(s)</strong>
+            <span>{{ percentualSubtarefas }}% de conclusão</span>
+          </div>
+          <po-progress
+            [p-value]="percentualSubtarefas"
+            p-size="medium"
+          >
+          </po-progress>
+        </div>
+
         <po-button
           id="btn-nova-subtarefa"
           p-label="Nova Subtarefa"
           p-icon="po-icon-plus"
-          p-type="primary"
-          p-kind="tertiary"
+          p-kind="primary"
           (p-click)="abrirNovaSubtarefa()"
         >
         </po-button>
@@ -139,25 +143,34 @@
         [p-loading]="isLoadingSubtarefas"
         [p-striped]="true"
         [p-literals]="literaisSubtarefas"
+        p-container="border"
+        [p-actions-right]="true"
+        [p-hide-table-search]="true"
+        [p-spacing]="tableSpacing"
+        [p-text-wrap]="false"
       >
       </po-table>
-    </div>
-  </ng-container>
-
+    </section>
+  </div>
 </po-modal>
 
-<!-- Modal de exclusão de subtarefa -->
 <po-modal
   id="modal-excluir-subtarefa"
   p-title="Confirmar Exclusão"
+  p-icon="po-icon-warning"
   [p-primary-action]="acaoConfirmarExclusaoSubtarefa"
   [p-secondary-action]="acaoCancelarExclusaoSubtarefa"
   #modalExcluirSubtarefaRef
 >
-  <p>Tem certeza que deseja excluir esta subtarefa? Esta ação não pode ser desfeita.</p>
+  <div class="delete-dialog">
+    <span class="delete-dialog__icon po-icon po-icon-warning"></span>
+    <div class="delete-dialog__content">
+      <strong>Deseja excluir esta subtarefa?</strong>
+      <p>Esta ação não pode ser desfeita.</p>
+    </div>
+  </div>
 </po-modal>
 
-<!-- Modal de subtarefa (inclusão/edição) -->
 <app-subtarefa-form
   [codigoTarefa]="tarefaEdicao?.codigo ?? ''"
   [subtarefaEdicao]="subtarefaEmEdicao"
